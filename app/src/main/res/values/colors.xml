@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="sexy_blue">#142240</color>
+    <color name="sexy_blue">#12203D</color>
     <color name="not_too_sexy_blue">#0C1532</color>
-    <color name="this_is_how_depression_looks_like">#71778F</color>
+    <color name="dead_smurf">#BECDE4</color>
+    <color name="this_is_how_depression_looks_like">#41587A</color>
     <color name="fancy_green">#95D904</color>
     <color name="non_straight_blue">#35BDF2</color>
 

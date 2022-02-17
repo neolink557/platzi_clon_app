@@ -3,11 +3,13 @@ package com.example.platziappclon
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.platziappclon.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getActionBarToolbar()
 
         val navView: BottomNavigationView = binding.navView
 
@@ -32,4 +35,18 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    fun setActionBarTittle(tittle:String) {
+        binding.actionBar.title = tittle
+        setSupportActionBar(binding.actionBar)
+    }
+
+    protected fun getActionBarToolbar(): Toolbar? {
+        val mActionBarToolbar:Toolbar = binding.actionBar
+        if (mActionBarToolbar != null) {
+            setSupportActionBar(mActionBarToolbar)
+        }
+        return mActionBarToolbar
+    }
+
 }
