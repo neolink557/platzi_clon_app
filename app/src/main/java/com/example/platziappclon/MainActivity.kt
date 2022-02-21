@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setActionBarTittle(tittle:String) {
+        getActionBarToolbar()
         binding.actionBar.title = tittle
         setSupportActionBar(binding.actionBar)
     }
