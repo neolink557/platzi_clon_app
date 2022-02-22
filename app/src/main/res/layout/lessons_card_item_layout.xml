@@ -13,12 +13,22 @@
         android:id="@+id/cardView"
         android:layout_width="150dp"
         android:layout_height="105dp"
-        android:foreground="@mipmap/ic_image"
         android:foregroundGravity="center|fill_vertical"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+        android:id="@+id/roundedImageViewLessonsItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_image"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textViewLessonsTittle"

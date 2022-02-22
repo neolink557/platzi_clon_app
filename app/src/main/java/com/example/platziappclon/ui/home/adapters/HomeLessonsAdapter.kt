@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.platziappclon.core.extensions.load
 import com.example.platziappclon.data.model.LessonsModel
 import com.example.platziappclon.databinding.LessonsCardItemLayoutBinding
 
@@ -28,6 +29,7 @@ class HomeLessonsAdapter(
 
         fun bindData(data: LessonsModel) {
             binding.textViewLessonsTittle.text = data.title
+            binding.roundedImageViewLessonsItem.load(data.image)
             binding.textViewLessonsSubTittle.text = data.subtitle
         }
     }
