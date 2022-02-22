@@ -3,56 +3,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="60dp"
-    android:padding="5dp"
     android:layout_marginStart="16dp"
     android:background="@drawable/round_corners_shape"
+    android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/imageViewAchievementsLeftIcon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_baseline_schedule_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/fancy_green" />
-
-    <TextView
-        android:id="@+id/textViewAchievementsItemTittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAchievementsLeftIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="You Have Studied 55 Minutes" />
-
-    <TextView
-        android:id="@+id/textViewAchievementsItemSubTittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/dead_smurf"
-        android:textSize="11sp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewAchievementsLeftIcon"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAchievementsItemTittle"
-        tools:text="of your goal of 7 hours" />
-
-    <ImageView
-        android:id="@+id/imageViewAchievementsRightIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="5dp"
-        android:scaleType="fitXY"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
-        app:tint="@color/fancy_green"
-        app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imageViewAchievementsLeftIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_schedule_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/fancy_green" />
+
+        <TextView
+            android:id="@+id/textViewAchievementsItemTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/imageViewAchievementsLeftIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="You Have Studied 55 Minutes" />
+
+        <TextView
+            android:id="@+id/textViewAchievementsItemSubTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/dead_smurf"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewAchievementsLeftIcon"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAchievementsItemTittle"
+            tools:text="of your goal of 7 hours" />
+
+        <ImageView
+            android:id="@+id/imageViewAchievementsRightIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.466"
+            app:tint="@color/fancy_green"
+            app:srcCompat="@drawable/ic_baseline_check_circle_outline_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
