@@ -1,4 +1,4 @@
-package com.example.platziappclon.data
+package com.example.platziappclon.data.model
 
 data class AchievementsModel(
     val title: String,

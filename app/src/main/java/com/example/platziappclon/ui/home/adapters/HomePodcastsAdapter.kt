@@ -4,9 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.platziappclon.data.LessonsModel
-import com.example.platziappclon.data.PodcastsModel
-import com.example.platziappclon.databinding.LessonsCardItemLayoutBinding
+import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.databinding.PodcastCardItemLayoutBinding
 
 class HomePodcastsAdapter(

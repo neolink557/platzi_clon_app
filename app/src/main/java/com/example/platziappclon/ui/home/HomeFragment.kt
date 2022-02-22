@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.platziappclon.data.AchievementsModel
-import com.example.platziappclon.data.LessonsModel
-import com.example.platziappclon.data.PathsModel
-import com.example.platziappclon.data.PodcastsModel
+import com.example.platziappclon.data.model.AchievementsModel
+import com.example.platziappclon.data.model.LessonsModel
+import com.example.platziappclon.data.model.PathsModel
+import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.databinding.FragmentHomeBinding
 import com.example.platziappclon.ui.home.adapters.HomeAchievementsAdapter
 import com.example.platziappclon.ui.home.adapters.HomeLessonsAdapter
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
 
     private fun setUpView() {
         val achievement = AchievementsModel("You Have Studied 55 Minutes","of your goal of 7 hours","d","f")
-        val podcasts = PodcastsModel("¿Qué hemos estado haciendo? ¡Un episodio sobre","d")
+        val podcasts = PodcastsModel("¿Qué hemos estado haciendo? ¡Un episodio sobre","d","0")
         val lessons = LessonsModel("Simple Present: Verb To Be and otr","Curso de ingles Básico","d")
         val paths = PathsModel("English School","#5sdasd","d",50,9)
         val myList = listOf<AchievementsModel>(achievement,achievement,achievement,achievement)

@@ -1,4 +1,4 @@
-package com.example.platziappclon
+package com.example.platziappclon.ui
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.platziappclon.R
 import com.example.platziappclon.databinding.ActivityMainBinding
 
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.platziappclon.R
-import com.example.platziappclon.data.PathsModel
+import com.example.platziappclon.data.model.PathsModel
 import com.example.platziappclon.databinding.PathsCardItemLayoutBinding
 
 class HomePathsAdapter(
