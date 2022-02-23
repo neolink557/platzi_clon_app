@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.platziappclon.core.extensions.load
 import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.databinding.PodcastCardItemLayoutBinding
 
@@ -22,12 +23,13 @@ class HomePodcastsAdapter(
 
     override fun getItemCount(): Int = achievements.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindData(achievements[position] as PodcastsModel)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindData(achievements[position])
 
     class ViewHolder(private val context: Context, private val binding: PodcastCardItemLayoutBinding):RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: PodcastsModel) {
             binding.textViewPodcastsTittle.text = data.title
+            binding.roundedImageViewPodcastsItem.load(data.image)
         }
     }
 

@@ -1,14 +1,12 @@
 package com.example.platziappclon.ui.home
 
-import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.platziappclon.data.model.AchievementsModel
 import com.example.platziappclon.data.model.LessonsModel
@@ -20,6 +18,7 @@ import com.example.platziappclon.ui.home.adapters.HomeLessonsAdapter
 import com.example.platziappclon.ui.home.adapters.HomePathsAdapter
 import com.example.platziappclon.ui.home.adapters.HomePodcastsAdapter
 
+
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -29,82 +28,91 @@ class HomeFragment : Fragment() {
     private lateinit var adapterPodcasts: HomePodcastsAdapter
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         homeViewModel.onCreate()
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        binding.homeFAB.shrink()
+        return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()
+        setUpListeners()
     }
 
-    private fun setUpObservers() {
-        homeViewModel.achievementsModel.observe(this, Observer {achievementsList ->
-            setUpAchievementsAdapter(achievementsList)
-        })
 
-        homeViewModel.lessonsModel.observe(this, Observer {lessonsList ->
-            setUpLessonsAdapter(lessonsList)
-        })
-
-        val podcasts = PodcastsModel("¿Qué hemos estado haciendo? ¡Un episodio sobre", "d", "0")
-        val paths = PathsModel("English School", "#5sdasd", "d", 50, 9)
-        val myListPaths = listOf<PathsModel>(paths, paths, paths)
-        val myListPodcasts = listOf<PodcastsModel>(podcasts, podcasts, podcasts, podcasts, podcasts)
-
-        adapterPaths = HomePathsAdapter(myListPaths)
-        adapterPodcasts = HomePodcastsAdapter(myListPodcasts)
-        //TODO find the way to change the tittle of actionBar
-
-
-        val layoutManagerPaths = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-
-        val layoutManagerPodcasts = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-
-        val layoutManagerInterests = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-
-
+    private fun setUpListeners() {
         binding.apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                homeScrollView.setOnScrollChangeListener { _, _, i2, _, _ ->
+                    if (500 < i2) {
+                        homeFAB.extend()
+                    } else {
+                        homeFAB.shrink()
+                    }
 
-            recyclerViewPathsHome.layoutManager = layoutManagerPaths
-            recyclerViewPathsHome.adapter = adapterPaths
-            adapterPaths.notifyDataSetChanged()
+                }
+            }
 
-            recyclerViewPodcastHome.layoutManager = layoutManagerPodcasts
-            recyclerViewPodcastHome.adapter = adapterPodcasts
-            adapterPaths.notifyDataSetChanged()
-
-            recyclerViewInterestHome.layoutManager = layoutManagerInterests
-            recyclerViewInterestHome.adapter = adapterPaths
         }
     }
 
-    private fun setUpAchievementsAdapter(achievements:List<AchievementsModel>){
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
+    private fun setUpObservers() {
+        homeViewModel.achievementsModel.observe(this, { achievementsList ->
+            setUpAchievementsAdapter(achievementsList)
+        })
+
+        homeViewModel.lessonsModel.observe(this, { lessonsList ->
+            setUpLessonsAdapter(lessonsList)
+        })
+
+        homeViewModel.pathsModel.observe(this, { pathsList ->
+            setUpPathsAdapter(pathsList)
+            setUpInterestsAdapter(pathsList)
+        })
+
+        homeViewModel.podcastsModel.observe(this, { podcastsList ->
+            setUpPodcastsAdapter(podcastsList)
+        })
+
+        //TODO find the way to change the tittle of actionBar
+
+    }
+
+
+    private fun setUpPodcastsAdapter(podcasts: List<PodcastsModel>) {
+        adapterPodcasts = HomePodcastsAdapter(podcasts)
+
+        val layoutManager= LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
+        binding.apply {
+            recyclerViewPodcastHome.layoutManager = layoutManager
+            recyclerViewPodcastHome.adapter = adapterPodcasts
+        }
+    }
+
+    private fun setUpAchievementsAdapter(achievements: List<AchievementsModel>) {
         adapterAchievements = HomeAchievementsAdapter(achievements)
 
         val layoutManager = LinearLayoutManager(
@@ -116,13 +124,11 @@ class HomeFragment : Fragment() {
         binding.apply {
             recyclerViewAchievementsHome.layoutManager = layoutManager
             recyclerViewAchievementsHome.adapter = adapterAchievements
-            adapterAchievements.notifyDataSetChanged()
-
         }
 
     }
 
-    private fun setUpLessonsAdapter(lessons:List<LessonsModel>){
+    private fun setUpLessonsAdapter(lessons: List<LessonsModel>) {
         adapterLessons = HomeLessonsAdapter(lessons)
 
         val layoutManager = LinearLayoutManager(
@@ -134,19 +140,46 @@ class HomeFragment : Fragment() {
         binding.apply {
             recyclerViewLessonsHome.layoutManager = layoutManager
             recyclerViewLessonsHome.adapter = adapterLessons
-            adapterLessons.notifyDataSetChanged()
 
         }
 
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    private fun setUpInterestsAdapter(interests: List<PathsModel>) {
+        adapterPaths = HomePathsAdapter(interests)
+
+        val layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
+        binding.apply {
+
+            recyclerViewInterestHome.layoutManager = layoutManager
+            recyclerViewInterestHome.adapter = adapterPaths
+        }
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setUpPathsAdapter(paths: List<PathsModel>) {
+        adapterPaths = HomePathsAdapter(paths)
+
+        val layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+
+
+        binding.apply {
+            recyclerViewPathsHome.layoutManager = layoutManager
+            recyclerViewPathsHome.adapter = adapterPaths
+        }
+
     }
+
+
+
+
 }

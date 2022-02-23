@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface LessonsApiClient {
     @GET("Lessons/.json")
-    suspend fun getAllAchievements():Response<List<LessonsModel>>
+    suspend fun getAllPaths():Response<List<LessonsModel>>
 }

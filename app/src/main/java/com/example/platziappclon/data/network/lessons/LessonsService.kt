@@ -10,7 +10,7 @@ class LessonsService {
 
     suspend fun getLessons(): List<LessonsModel> {
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(LessonsApiClient::class.java).getAllAchievements()
+            val response = retrofit.create(LessonsApiClient::class.java).getAllPaths()
             response.body() ?: emptyList()
         }
     }

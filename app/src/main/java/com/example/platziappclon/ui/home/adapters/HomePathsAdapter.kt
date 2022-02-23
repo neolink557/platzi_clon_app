@@ -1,10 +1,12 @@
 package com.example.platziappclon.ui.home.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.platziappclon.R
+import com.example.platziappclon.core.extensions.load
 import com.example.platziappclon.data.model.PathsModel
 import com.example.platziappclon.databinding.PathsCardItemLayoutBinding
 
@@ -23,13 +25,15 @@ class HomePathsAdapter(
 
     override fun getItemCount(): Int = achievements.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindData(achievements[position] as PathsModel)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindData(achievements[position])
 
     class ViewHolder(private val context: Context, private val binding: PathsCardItemLayoutBinding):RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: PathsModel) {
             binding.textViewPathsCoursesTitle.text = data.title
             binding.progressPathsCoursesPercentage.progress = data.percentage
+            binding.layoutPathsItemBg.setBackgroundColor(Color.parseColor(data.color))
+            binding.imageViewPathsCourses.load(data.image)
             binding.textViewPathsCoursesPercentage.text = context.getString(R.string.courses_completed, data.percentage.toString(),"%")
             binding.textViewPathsCoursesQuantity.text = context.getString(R.string.courses_quantity, data.courses.toString())
 
