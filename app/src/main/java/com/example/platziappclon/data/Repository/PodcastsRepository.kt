@@ -1,25 +1,19 @@
 package com.example.platziappclon.data.Repository
 
-import android.media.AudioManager
-import android.media.MediaPlayer
 import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.data.network.Podcasts.PodcastsService
-import java.io.IOException
+import javax.inject.Inject
 
-class PodcastsRepository {
+class PodcastsRepository @Inject constructor(
+    private val api: PodcastsService
+) {
 
-    private val api = PodcastsService()
-
-    suspend fun getAllPodcasts(): List<PodcastsModel>{
-        val response: List<PodcastsModel> = api.getPodcasts()
-        return response
+    suspend fun getAllPodcasts(): List<PodcastsModel> {
+        return api.getPodcasts()
     }
 
-    fun preparePodcast(url:String){
+    fun preparePodcast(url: String) {
         api.preparePodcast(url)
     }
 
-    suspend fun togglePodcast(){
-        api.togglePodcast()
-    }
 }

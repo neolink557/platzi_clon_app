@@ -1,6 +1,7 @@
 package com.example.platziappclon.ui
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,9 +11,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.platziappclon.R
 import com.example.platziappclon.databinding.ActivityMainBinding
+import com.example.platziappclon.ui.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 
-
-class MainActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(),HomeFragment.MyStringListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,18 +41,37 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    fun setActionBarTittle(tittle:String) {
+    private fun setActionBarTittle(tittle:String) {
         getActionBarToolbar()
         binding.actionBar.title = tittle
         setSupportActionBar(binding.actionBar)
     }
 
-    protected fun getActionBarToolbar(): Toolbar? {
+    private fun getActionBarToolbar(): Toolbar {
         val mActionBarToolbar:Toolbar = binding.actionBar
-        if (mActionBarToolbar != null) {
-            setSupportActionBar(mActionBarToolbar)
-        }
+        setSupportActionBar(mActionBarToolbar)
         return mActionBarToolbar
+    }
+
+    private fun disable(boolean: Boolean){
+        binding.container.disabled = boolean
+    }
+
+    override fun turnToGrayscale(boolean: Boolean){
+       disable(boolean)
+    }
+
+    override fun setActionBarName(string: String) {
+        setActionBarTittle(string)
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        if (isLoading){
+            binding.progressBar.visibility = View.VISIBLE
+        }else{
+            binding.progressBar.visibility = View.GONE
+        }
+
     }
 
 }

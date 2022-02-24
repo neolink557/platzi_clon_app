@@ -1,5 +1,6 @@
 package com.example.platziappclon.ui.home
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,8 +18,10 @@ import com.example.platziappclon.ui.home.adapters.HomeAchievementsAdapter
 import com.example.platziappclon.ui.home.adapters.HomeLessonsAdapter
 import com.example.platziappclon.ui.home.adapters.HomePathsAdapter
 import com.example.platziappclon.ui.home.adapters.HomePodcastsAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import java.lang.ClassCastException
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -27,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var adapterPaths: HomePathsAdapter
     private lateinit var adapterPodcasts: HomePodcastsAdapter
     private var _binding: FragmentHomeBinding? = null
+    lateinit var listener:MyStringListener
 
 
     private val binding get() = _binding!!
@@ -40,15 +44,25 @@ class HomeFragment : Fragment() {
         homeViewModel.onCreate()
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.homeFAB.shrink()
+
+
         return binding.root
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        listener.setActionBarName("Hello, Brayan!")
         setUpObservers()
         setUpListeners()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = context as MyStringListener
+        } catch (castException: ClassCastException) {
+            /** The activity does not implement the listener.  */
+        }
     }
 
 
@@ -56,7 +70,7 @@ class HomeFragment : Fragment() {
         binding.apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 homeScrollView.setOnScrollChangeListener { _, _, i2, _, _ ->
-                    if (500 < i2) {
+                    if (500 > i2) {
                         homeFAB.extend()
                     } else {
                         homeFAB.shrink()
@@ -64,7 +78,6 @@ class HomeFragment : Fragment() {
 
                 }
             }
-
         }
     }
 
@@ -92,7 +105,16 @@ class HomeFragment : Fragment() {
             setUpPodcastsAdapter(podcastsList)
         })
 
-        //TODO find the way to change the tittle of actionBar
+        homeViewModel.isLoading.observe(this,{isLoading ->
+            if (isLoading){
+                listener.turnToGrayscale(true)
+                listener.showLoading(true)
+            }else{
+                listener.turnToGrayscale(false)
+                listener.showLoading(false)
+            }
+
+        })
 
     }
 
@@ -179,7 +201,10 @@ class HomeFragment : Fragment() {
 
     }
 
-
-
+    interface MyStringListener {
+        fun turnToGrayscale(boolean: Boolean)
+        fun setActionBarName(string: String)
+        fun showLoading(isLoading: Boolean)
+    }
 
 }

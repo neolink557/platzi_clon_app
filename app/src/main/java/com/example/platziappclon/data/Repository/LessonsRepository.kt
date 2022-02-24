@@ -2,14 +2,12 @@ package com.example.platziappclon.data.Repository
 
 import com.example.platziappclon.data.model.LessonsModel
 import com.example.platziappclon.data.network.lessons.LessonsService
+import javax.inject.Inject
 
-class LessonsRepository {
-
-    private val api = LessonsService()
+class LessonsRepository @Inject constructor(private val api: LessonsService) {
 
     suspend fun getAllLessons(): List<LessonsModel> {
-        val response: List<LessonsModel> = api.getLessons()
-        return response
+        return api.getLessons()
     }
 
 }

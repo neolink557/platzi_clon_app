@@ -1,46 +1,29 @@
 package com.example.platziappclon.data.network.Podcasts
 
-
-import com.example.platziappclon.core.MediaHelper
-import com.example.platziappclon.core.RetrofitHelper
+import android.media.MediaPlayer
 import com.example.platziappclon.data.model.PodcastsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import javax.inject.Inject
 
-class PodcastsService {
+class PodcastsService @Inject constructor(
+    private val mediaPlayer: MediaPlayer,
+    private val api: PodcastsApiClient
+) {
 
-    private val retrofit = RetrofitHelper.getRetrofit()
-    private val mediaPlayer = MediaHelper.getMedia()
-
-    suspend fun getPodcasts():List<PodcastsModel>{
-        return withContext(Dispatchers.IO){
-            val response = retrofit.create(PodcastsApiClient::class.java).getAllPodcasts()
+    suspend fun getPodcasts(): List<PodcastsModel> {
+        return withContext(Dispatchers.IO) {
+            val response = api.getAllPodcasts()
             response.body() ?: emptyList()
         }
     }
 
-    fun preparePodcast(url:String){
-        if (!mediaPlayer.isPlaying){
+    fun preparePodcast(url: String) {
+        if (!mediaPlayer.isPlaying) {
             try {
                 mediaPlayer.setDataSource(url)
                 mediaPlayer.prepareAsync()
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-
-    suspend fun togglePodcast(){
-        return withContext(Dispatchers.IO){
-            try {
-                if (!mediaPlayer.isPlaying){
-                    mediaPlayer.start()
-                }else{
-                    mediaPlayer.stop()
-                }
 
             } catch (e: IOException) {
                 e.printStackTrace()
