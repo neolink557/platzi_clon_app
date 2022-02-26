@@ -30,6 +30,7 @@ class ManageAudioPodcastUseCase @Inject constructor(
                 } else {
                     mediaPlayer.setOnCompletionListener {
                         mediaPlayer.stop()
+
                     }
                 }
 
