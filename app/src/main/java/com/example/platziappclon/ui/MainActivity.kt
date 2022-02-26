@@ -13,10 +13,9 @@ import com.example.platziappclon.R
 import com.example.platziappclon.databinding.ActivityMainBinding
 import com.example.platziappclon.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.WithFragmentBindings
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),HomeFragment.MyStringListener {
+class MainActivity : AppCompatActivity(),ActivityController {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity(),HomeFragment.MyStringListener {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
 
     private fun setActionBarTittle(tittle:String) {
         getActionBarToolbar()

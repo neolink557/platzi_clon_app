@@ -6,18 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.platziappclon.R
 import com.example.platziappclon.data.model.AchievementsModel
 import com.example.platziappclon.data.model.LessonsModel
 import com.example.platziappclon.data.model.PathsModel
 import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.databinding.FragmentHomeBinding
-import com.example.platziappclon.ui.home.adapters.HomeAchievementsAdapter
-import com.example.platziappclon.ui.home.adapters.HomeLessonsAdapter
-import com.example.platziappclon.ui.home.adapters.HomePathsAdapter
-import com.example.platziappclon.ui.home.adapters.HomePodcastsAdapter
+import com.example.platziappclon.ui.ActivityController
+import com.example.platziappclon.ui.home.adapters.achievements.HomeAchievementsAdapter
+import com.example.platziappclon.ui.home.adapters.lessons.HomeLessonsAdapter
+import com.example.platziappclon.ui.home.adapters.paths.HomePathsAdapter
+import com.example.platziappclon.ui.home.adapters.podcasts.HomePodcastsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ClassCastException
 
@@ -29,25 +33,26 @@ class HomeFragment : Fragment() {
     private lateinit var adapterLessons: HomeLessonsAdapter
     private lateinit var adapterPaths: HomePathsAdapter
     private lateinit var adapterPodcasts: HomePodcastsAdapter
-    private var _binding: FragmentHomeBinding? = null
-    lateinit var listener:MyStringListener
+    lateinit var listener: ActivityController
 
 
     private val binding get() = _binding!!
+    private var _binding: FragmentHomeBinding? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
-
         homeViewModel.onCreate()
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
 
         return binding.root
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -56,10 +61,23 @@ class HomeFragment : Fragment() {
         setUpListeners()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            onBackPressed()
+        }
+    }
+
+
+    private fun onBackPressed() {
+        listener.setActionBarName("Hello, Brayan!")
+    }
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            listener = context as MyStringListener
+            listener = context as ActivityController
         } catch (castException: ClassCastException) {
             /** The activity does not implement the listener.  */
         }
@@ -105,11 +123,11 @@ class HomeFragment : Fragment() {
             setUpPodcastsAdapter(podcastsList)
         })
 
-        homeViewModel.isLoading.observe(this,{isLoading ->
-            if (isLoading){
+        homeViewModel.isLoading.observe(this, { isLoading ->
+            if (isLoading) {
                 listener.turnToGrayscale(true)
                 listener.showLoading(true)
-            }else{
+            } else {
                 listener.turnToGrayscale(false)
                 listener.showLoading(false)
             }
@@ -120,9 +138,9 @@ class HomeFragment : Fragment() {
 
 
     private fun setUpPodcastsAdapter(podcasts: List<PodcastsModel>) {
-        adapterPodcasts = HomePodcastsAdapter(podcasts)
+        adapterPodcasts = HomePodcastsAdapter(podcasts) { podcast -> onItemClicked(podcast) }
 
-        val layoutManager= LinearLayoutManager(
+        val layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.HORIZONTAL,
             false
@@ -201,10 +219,8 @@ class HomeFragment : Fragment() {
 
     }
 
-    interface MyStringListener {
-        fun turnToGrayscale(boolean: Boolean)
-        fun setActionBarName(string: String)
-        fun showLoading(isLoading: Boolean)
+    private fun onItemClicked(podcast: PodcastsModel){
+        val action = HomeFragmentDirections.actionNavigationStudyToPodcastsFragment(podcast)
+        findNavController().navigate(action)
     }
-
 }

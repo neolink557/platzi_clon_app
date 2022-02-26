@@ -9,6 +9,9 @@
     <color name="rotten_green">#485235</color>
     <color name="non_straight_blue">#35BDF2</color>
 
+    <color name="seek_bar_background">#41587A</color>
+    <color name="seek_bar_progress">#ffffff</color>
+    <color name="seek_bar_secondary_progress">#35BDF2</color>
 
 
     <color name="purple_200">#F288CD</color>

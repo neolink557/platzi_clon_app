@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.podcasts.PodcastsFragmentBottomSheetDialog">
+
+    <ImageButton
+        android:id="@+id/collapseImageButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+    <com.example.platziappclon.core.ConstraintLayoutWithDisableSupport
+        android:id="@+id/bottomSheetDialogPodcasts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/sexy_blue"
+        android:paddingHorizontal="30dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="50dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintBottom_toTopOf="@id/textViewPodcastsTittleBTD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <ImageView
+                android:id="@+id/roundedImageViewPodcastsItemBSD"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/lesson_image"
+                tools:scaleType="fitXY"
+                tools:src="@mipmap/ic_image" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textViewPodcastsTittleBTD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.1"
+            tools:text="¿Que hémos estado haciendo? ¡un episodio lleno de voces y respuestas!" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:progressTint="@color/white"
+            android:thumbTint="@color/non_straight_blue"
+            app:layout_constraintBottom_toTopOf="@id/materialPlayButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewPodcastsTittleBTD"
+            android:progressDrawable="@drawable/seek_bar"
+            android:thumb="@drawable/seek_thumb"
+            app:layout_constraintVertical_bias="1" />
+
+
+        <TextView
+            android:id="@+id/textViewTimerInit"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.05"
+            tools:text="0:15" />
+
+        <TextView
+            android:id="@+id/textViewTimerFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.05"
+            tools:text="36:00" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialPlayButton"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="120dp"
+            android:backgroundTint="@color/non_straight_blue"
+            android:elevation="0dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="1dp"
+            app:cornerRadius="200dp"
+            android:layout_marginHorizontal="40dp"
+            app:icon="@drawable/ic_pause"
+            app:iconSize="25dp"
+            app:iconTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/materialButtonAdvance"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/materialButtonBack"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonBack"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:elevation="0dp"
+            android:paddingTop="5dp"
+            android:rotation="300"
+            app:cornerRadius="200dp"
+            app:icon="@drawable/ic_baseline_replay_24"
+            app:iconGravity="top"
+            app:iconSize="40dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/materialPlayButton"
+            app:layout_constraintEnd_toStartOf="@id/materialPlayButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/materialPlayButton"
+            app:layout_constraintVertical_bias="0.0"
+            app:rippleColor="#EFE9E9" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/materialButtonAdvance"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="50dp"
+            android:elevation="0dp"
+            android:paddingTop="5dp"
+            android:rotation="150"
+            android:rotationX="180"
+            app:cornerRadius="200dp"
+            app:icon="@drawable/ic_baseline_replay_24"
+            app:iconGravity="top"
+            app:iconSize="40dp"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/materialPlayButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/materialPlayButton"
+            app:layout_constraintTop_toTopOf="@+id/materialPlayButton"
+            app:layout_constraintVertical_bias="1.0"
+            app:rippleColor="#ECDEDE" />
+
+    </com.example.platziappclon.core.ConstraintLayoutWithDisableSupport>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/container"
+        app:layout_constraintEnd_toEndOf="@+id/container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/container" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

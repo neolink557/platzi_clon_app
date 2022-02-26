@@ -9,7 +9,11 @@
         android:id="@+id/navigation_study"
         android:name="com.example.platziappclon.ui.home.HomeFragment"
         android:label="@string/title_study"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_study_to_podcastsFragment"
+            app:destination="@id/podcastsFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_explore"
@@ -22,4 +26,17 @@
         android:name="com.example.platziappclon.ui.notifications.NotificationsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_notifications" />
+
+    <dialog
+        android:id="@+id/podcastsFragment2"
+        android:name="com.example.platziappclon.ui.podcasts.PodcastsFragmentBottomSheetDialog"
+        android:label="podcasts_fragment"
+        tools:layout="@layout/podcasts_fragment_bottom_sheet_dialog">
+        <action
+            android:id="@+id/action_podcastsFragment2_to_navigation_study"
+            app:destination="@id/navigation_study" />
+        <argument
+            android:name="podcast"
+            app:argType="com.example.platziappclon.data.model.PodcastsModel" />
+    </dialog>
 </navigation>

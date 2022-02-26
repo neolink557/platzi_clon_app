@@ -1,6 +1,7 @@
 package com.example.platziappclon.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PodcastsModel(
     @SerializedName("title")
@@ -11,4 +12,4 @@ data class PodcastsModel(
 
     @SerializedName("url")
     val url:String
-)
+):Serializable

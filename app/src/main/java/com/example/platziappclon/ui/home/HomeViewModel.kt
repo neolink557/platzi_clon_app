@@ -20,9 +20,7 @@ class HomeViewModel @Inject constructor(
     private val getAchievementsUseCase:GetAchievementsUseCase,
     private val getLessonsUseCase:GetLessonsUseCase,
     private val getPathsUseCase:GetPathsUseCase,
-    private val playAudioPodcastsUseCase:ManageAudioPodcastUseCase,
-    private val getPodcastsUseCase:GetPodcastsUseCase,
-    private val media:MediaPlayer
+    private val getPodcastsUseCase:GetPodcastsUseCase
 ): ViewModel() {
 
     val achievementsModel = MutableLiveData<List<AchievementsModel>>()
@@ -40,21 +38,6 @@ class HomeViewModel @Inject constructor(
         getLessons()
         getPaths()
         getPodcasts()
-    }
-
-    fun preparePodcast(){
-        playAudioPodcastsUseCase.preparePodcasts("https://firebasestorage.googleapis.com/v0/b/platziclonrepo.appspot.com/o/los-verdaderos-retos-de-un-fundador-de-startup-christian-van-der-henst.mp3?alt=media&token=4c9679ac-614b-4bbf-9191-c4a351244e31")
-        media.setOnPreparedListener {
-            viewModelScope.launch {
-                playAudioPodcastsUseCase.toggleAudio()
-            }
-        }
-    }
-
-    fun togglePodcast(){
-        viewModelScope.launch {
-            playAudioPodcastsUseCase.toggleAudio()
-        }
     }
 
     private fun getLessons(){
