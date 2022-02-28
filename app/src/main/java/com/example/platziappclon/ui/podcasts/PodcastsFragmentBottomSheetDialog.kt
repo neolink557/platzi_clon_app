@@ -1,40 +1,40 @@
 package com.example.platziappclon.ui.podcasts
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import com.example.platziappclon.databinding.PodcastsFragmentBottomSheetDialogBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import android.app.Activity
-import android.util.DisplayMetrics
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
 import android.widget.FrameLayout
+import android.widget.SeekBar
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.example.platziappclon.R
 import com.example.platziappclon.core.extensions.load
-import com.example.platziappclon.ui.ActivityController
-import javax.inject.Inject
+import com.example.platziappclon.databinding.PodcastsFragmentBottomSheetDialogBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.ClassCastException
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialogFragment() {
 
     private val viewModel: PodcastsViewModel by viewModels()
 
-    private var isPaused = true
+    private var isPaused = false
     private lateinit var behavior: BottomSheetBehavior<*>
-    val args:PodcastsFragmentBottomSheetDialogArgs by navArgs()
+    val args: PodcastsFragmentBottomSheetDialogArgs by navArgs()
+    lateinit var runnable: Runnable
 
     private val binding get() = _binding!!
     private var _binding: PodcastsFragmentBottomSheetDialogBinding? = null
@@ -55,6 +55,7 @@ class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialog
 
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
+        viewModel.killAudio()
         findNavController().navigate(R.id.action_podcastsFragment2_to_navigation_study)
     }
 
@@ -79,12 +80,50 @@ class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialog
                 binding.progressBar.visibility = View.GONE
             }
         })
+
+        viewModel.podcastDuration.observe(this, { duration ->
+            binding.textViewTimerFinal.text = duration[0] as String
+            binding.seekBar.max = duration[1] as Int
+            initialiseSeekBar()
+        })
+
+        viewModel.podcastActualDuration.observe(this, { duration ->
+            binding.seekBar.progress = duration[1] as Int
+            binding.textViewTimerInit.text = duration[0] as String
+        })
+
     }
 
 
     private fun setUpView() {
         binding.apply {
+
+            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+                override fun onProgressChanged(p0: SeekBar?, position: Int, p2: Boolean) {
+                    if (p2) {
+                        viewModel.setPosition(position)
+                    }
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+                }
+
+            })
+
+            materialButtonBack.setOnClickListener {
+                viewModel.goBack()
+            }
+
+            materialButtonAdvance.setOnClickListener {
+                viewModel.goForward()
+            }
+
             collapseImageButton.setOnClickListener {
+                viewModel.killAudio()
                 dismiss()
             }
 
@@ -92,19 +131,33 @@ class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialog
                 viewModel.togglePodcast()
 
                 isPaused = !isPaused
-                if (isPaused){
-                    materialPlayButton.icon = ContextCompat.getDrawable(materialPlayButton.context,R.drawable.ic_play)
-                }else{
-                    materialPlayButton.icon = ContextCompat.getDrawable(materialPlayButton.context,R.drawable.ic_pause)
+                if (isPaused) {
+                    materialPlayButton.icon =
+                        ContextCompat.getDrawable(materialPlayButton.context, R.drawable.ic_play)
+                } else {
+                    materialPlayButton.icon =
+                        ContextCompat.getDrawable(materialPlayButton.context, R.drawable.ic_pause)
                 }
 
             }
 
-
             roundedImageViewPodcastsItemBSD.load(args.podcast.image)
+
             textViewPodcastsTittleBTD.text = args.podcast.title
         }
-        viewModel.preparePodcast(args.podcast.url)
+
+        viewModel.preparePodcast(requireContext(), args.podcast.url)
+    }
+
+    private fun initialiseSeekBar() {
+        runnable = Runnable {
+            viewModel.getActualDuration()
+            Handler(Looper.getMainLooper()).postDelayed(runnable, 1000)
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed(runnable, 1000)
+
+
     }
 
     private fun setUpScrolling() {
@@ -140,5 +193,13 @@ class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialog
         return displayMetrics.heightPixels
     }
 
-
+    private fun convertFormat(time: Long): String {
+        return String.format(
+            "%02d:%02d",
+            TimeUnit.MILLISECONDS.toMinutes(time),
+            TimeUnit.MILLISECONDS.toSeconds(time),
+            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time))
+        )
+    }
 }
+

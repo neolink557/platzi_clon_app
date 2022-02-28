@@ -6,14 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.podcasts.PodcastsFragmentBottomSheetDialog">
 
-    <ImageButton
-        android:id="@+id/collapseImageButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
 
     <com.example.platziappclon.core.ConstraintLayoutWithDisableSupport
         android:id="@+id/bottomSheetDialogPodcasts"
@@ -181,6 +174,15 @@
         app:layout_constraintEnd_toEndOf="@+id/container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/container" />
+    <ImageButton
+        android:id="@+id/collapseImageButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:contentDescription="close" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

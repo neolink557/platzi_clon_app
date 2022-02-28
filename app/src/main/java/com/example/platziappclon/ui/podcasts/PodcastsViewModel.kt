@@ -1,5 +1,6 @@
 package com.example.platziappclon.ui.podcasts
 
+import android.content.Context
 import android.media.MediaPlayer
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,33 +8,52 @@ import androidx.lifecycle.viewModelScope
 import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.domain.podcasts.ManageAudioPodcastUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PodcastsViewModel @Inject constructor(
-    private val playAudioPodcastsUseCase: ManageAudioPodcastUseCase,
-    private val media: MediaPlayer
+    private val audioPodcastsUseCase: ManageAudioPodcastUseCase
 ) : ViewModel() {
 
     val podcastsModel = MutableLiveData<List<PodcastsModel>>()
+    val podcastDuration = MutableLiveData<List<Any>>()
+    val podcastActualDuration = MutableLiveData<List<Any>>()
 
     val isLoading = MutableLiveData<Boolean>()
 
-    fun preparePodcast(url:String) {
+    fun preparePodcast(context: Context, url: String) {
         isLoading.postValue(true)
-        playAudioPodcastsUseCase.preparePodcasts(url)
-        media.setOnPreparedListener {
-            viewModelScope.launch {
-                isLoading.postValue(false)
-                playAudioPodcastsUseCase.toggleAudio()
-            }
-        }
+        audioPodcastsUseCase.preparePodcasts(context, url)
+        isLoading.postValue(false)
+        audioPodcastsUseCase.toggleAudio()
+        getDuration()
     }
 
     fun togglePodcast() {
-        viewModelScope.launch {
-            playAudioPodcastsUseCase.toggleAudio()
-        }
+        audioPodcastsUseCase.toggleAudio()
+    }
+
+    fun goBack(){
+        audioPodcastsUseCase.goBack()
+    }
+
+    fun killAudio(){
+        audioPodcastsUseCase.killAudio()
+    }
+
+    fun goForward(){
+        audioPodcastsUseCase.goForward()
+    }
+
+    fun setPosition(position: Int) {
+        audioPodcastsUseCase.setPosition(position)
+    }
+
+    private fun getDuration() {
+        podcastDuration.postValue(audioPodcastsUseCase.getDuration())
+    }
+
+    fun getActualDuration() {
+        podcastActualDuration.postValue(audioPodcastsUseCase.getActualDuration())
     }
 }

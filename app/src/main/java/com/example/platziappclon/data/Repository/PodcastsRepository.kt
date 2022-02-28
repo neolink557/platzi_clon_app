@@ -1,5 +1,6 @@
 package com.example.platziappclon.data.Repository
 
+import android.content.Context
 import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.data.network.Podcasts.PodcastsService
 import javax.inject.Inject
@@ -12,8 +13,9 @@ class PodcastsRepository @Inject constructor(
         return api.getPodcasts()
     }
 
-    fun preparePodcast(url: String) {
-        api.preparePodcast(url)
+    fun preparePodcast(context: Context, url: String): String {
+        //api.preparePodcast(url) firebase couta exceeded ಥ_ಥ
+        return "android.resource://" + context.packageName.toString() + "/raw/$url"
     }
 
 }

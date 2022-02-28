@@ -8,7 +8,6 @@ import java.io.IOException
 import javax.inject.Inject
 
 class PodcastsService @Inject constructor(
-    private val mediaPlayer: MediaPlayer,
     private val api: PodcastsApiClient
 ) {
 
@@ -19,7 +18,7 @@ class PodcastsService @Inject constructor(
         }
     }
 
-    fun preparePodcast(url: String) {
+    /*fun preparePodcast(url: String) {
         if (!mediaPlayer.isPlaying) {
             try {
                 mediaPlayer.setDataSource(url)
@@ -29,6 +28,6 @@ class PodcastsService @Inject constructor(
                 e.printStackTrace()
             }
         }
-    }
+    }*/
 
 }
