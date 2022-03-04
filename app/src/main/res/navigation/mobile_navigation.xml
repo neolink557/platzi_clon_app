@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_study_to_podcastsFragment"
             app:destination="@id/podcastsFragment2" />
+        <action
+            android:id="@+id/action_navigation_study_to_lessons_fragment_bottom_sheet_dialog"
+            app:destination="@id/lessons_fragment_bottom_sheet_dialog" />
     </fragment>
 
     <fragment
@@ -38,5 +41,17 @@
         <argument
             android:name="podcast"
             app:argType="com.example.platziappclon.data.model.PodcastsModel" />
+    </dialog>
+    <dialog
+        android:id="@+id/lessons_fragment_bottom_sheet_dialog"
+        android:name="com.example.platziappclon.ui.lessons.LessonsFragmentBottomSheetDialog"
+        android:label="lessons_fragment_bottom_sheet_dialog_fragment"
+        tools:layout="@layout/lessons_fragment_bottom_sheet_dialog_fragment" >
+        <action
+            android:id="@+id/action_lessons_fragment_bottom_sheet_dialog_to_navigation_study"
+            app:destination="@id/navigation_study" />
+        <argument
+            android:name="Lessons"
+            app:argType="com.example.platziappclon.data.model.LessonsModel" />
     </dialog>
 </navigation>

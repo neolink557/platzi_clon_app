@@ -193,13 +193,5 @@ class PodcastsFragmentBottomSheetDialog @Inject constructor(): BottomSheetDialog
         return displayMetrics.heightPixels
     }
 
-    private fun convertFormat(time: Long): String {
-        return String.format(
-            "%02d:%02d",
-            TimeUnit.MILLISECONDS.toMinutes(time),
-            TimeUnit.MILLISECONDS.toSeconds(time),
-            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time))
-        )
-    }
 }
 

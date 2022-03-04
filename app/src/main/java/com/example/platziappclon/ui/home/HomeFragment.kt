@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
 
 
     private fun setUpPodcastsAdapter(podcasts: List<PodcastsModel>) {
-        adapterPodcasts = HomePodcastsAdapter(podcasts) { podcast -> onItemClicked(podcast) }
+        adapterPodcasts = HomePodcastsAdapter(podcasts) { podcast -> onPodcastsItemClicked(podcast) }
 
         val layoutManager = LinearLayoutManager(
             requireContext(),
@@ -169,7 +169,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpLessonsAdapter(lessons: List<LessonsModel>) {
-        adapterLessons = HomeLessonsAdapter(lessons)
+        adapterLessons = HomeLessonsAdapter(lessons){ lessons -> onLessonsItemClicked(lessons)}
 
         val layoutManager = LinearLayoutManager(
             requireContext(),
@@ -219,7 +219,12 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun onItemClicked(podcast: PodcastsModel){
+    private fun onLessonsItemClicked(lessons: LessonsModel){
+        val action = HomeFragmentDirections.actionNavigationStudyToLessonsFragmentBottomSheetDialog(lessons)
+        findNavController().navigate(action)
+    }
+
+    private fun onPodcastsItemClicked(podcast: PodcastsModel){
         val action = HomeFragmentDirections.actionNavigationStudyToPodcastsFragment(podcast)
         findNavController().navigate(action)
     }

@@ -9,12 +9,13 @@ import com.example.platziappclon.databinding.LessonsCardItemLayoutBinding
 class HomeLessonsViewHolder(view: View, private val binding: LessonsCardItemLayoutBinding) :
     RecyclerView.ViewHolder(view) {
 
-    fun bindData(data: LessonsModel) {
+    fun bindData(data: LessonsModel, onClickListener: (LessonsModel) -> Unit) {
         binding.apply {
             textViewLessonsTittle.text = data.title
             roundedImageViewLessonsItem.load(data.image)
             textViewLessonsSubTittle.text = data.subtitle
         }
+        itemView.setOnClickListener { onClickListener(data) }
 
     }
 

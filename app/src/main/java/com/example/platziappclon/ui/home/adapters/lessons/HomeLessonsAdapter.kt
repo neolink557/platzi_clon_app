@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.platziappclon.core.extensions.load
 import com.example.platziappclon.data.model.LessonsModel
+import com.example.platziappclon.data.model.PodcastsModel
 import com.example.platziappclon.databinding.LessonsCardItemLayoutBinding
 
 class HomeLessonsAdapter(
-    private val achievements: List<LessonsModel>
+    private val achievements: List<LessonsModel>,
+    private val onClickListener:(LessonsModel)-> Unit
 ) : RecyclerView.Adapter<HomeLessonsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeLessonsViewHolder {
@@ -21,6 +23,6 @@ class HomeLessonsAdapter(
     override fun getItemCount(): Int = achievements.size
 
     override fun onBindViewHolder(holder: HomeLessonsViewHolder, position: Int) =
-        holder.bindData(achievements[position])
+        holder.bindData(achievements[position],onClickListener)
 
 }
