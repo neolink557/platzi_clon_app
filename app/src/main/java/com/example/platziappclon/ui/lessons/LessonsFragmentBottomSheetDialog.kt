@@ -11,19 +11,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.platziappclon.R
 import com.example.platziappclon.databinding.LessonsFragmentBottomSheetDialogFragmentBinding
-import com.example.platziappclon.databinding.PodcastsFragmentBottomSheetDialogBinding
+import com.example.platziappclon.ui.lessons.adapters.ViewPagerLessonsBSDAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.tabs.TabLayoutMediator
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
-
-
 
 
 @AndroidEntryPoint
@@ -59,7 +56,46 @@ class LessonsFragmentBottomSheetDialog @Inject constructor() : BottomSheetDialog
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setUpVideoPlayer()
+        setUpView()
+        setUpViewpager()
+        setUpListeners()
+    }
 
+    private fun setUpListeners() {
+        binding.apply {
+            imageViewGoBackLessonsBSD.setOnClickListener {
+                dismiss()
+            }
+        }
+    }
+
+    private fun setUpViewpager() {
+        binding.apply {
+            viewPagerLessonsBSD.adapter = ViewPagerLessonsBSDAdapter(
+                requireActivity(),
+                listOf(
+                    SyllabusLessonsFragment(),
+                    ResourcesLessonsFragment(),
+                    CommunityLessonsFragment()
+                )
+            )
+            TabLayoutMediator(tabLayoutLessonsBSD,viewPagerLessonsBSD){tab,position ->
+                when(position){
+                    0 -> tab.text = "Syllabus"
+                    1 -> tab.text = "Resources"
+                    2 -> tab.text = "Community"
+                }
+            }.attach()
+        }
+    }
+
+    private fun setUpView() {
+        binding.apply {
+            textViewTittleLessonsBSD.text = args.lessons.title
+            textViewLessonTittleLessonsBSD.text = args.lessons.subtitle
+            textViewCoursesTittleLessonsBSD.text = args.lessons.course
+
+        }
     }
 
     private fun setUpVideoPlayer() {
@@ -68,7 +104,7 @@ class LessonsFragmentBottomSheetDialog @Inject constructor() : BottomSheetDialog
                 .controls(1)
                 .build()
             requireActivity().lifecycle.addObserver(videoPlayerLessons)
-            videoPlayerLessons.initialize(object:AbstractYouTubePlayerListener(){
+            videoPlayerLessons.initialize(object : AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
                     super.onReady(youTubePlayer)
                     youTubePlayer.loadVideo(args.lessons.url, 0f)

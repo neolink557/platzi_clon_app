@@ -14,5 +14,9 @@ data class LessonsModel(
     val image:String,
 
     @SerializedName("url")
-    val url:String
+    val url:String,
+
+    @SerializedName("course")
+    val course:String
+
 ): Serializable
