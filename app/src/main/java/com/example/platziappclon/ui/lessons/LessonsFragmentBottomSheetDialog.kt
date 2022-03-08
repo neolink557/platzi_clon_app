@@ -10,7 +10,7 @@ import android.widget.FrameLayout
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.platziappclon.R
-import com.example.platziappclon.databinding.LessonsFragmentBottomSheetDialogFragmentBinding
+import com.example.platziappclon.databinding.FragmentBottomSheetDialogLessonsBinding
 import com.example.platziappclon.ui.lessons.adapters.ViewPagerLessonsBSDAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,17 +27,16 @@ import javax.inject.Inject
 class LessonsFragmentBottomSheetDialog @Inject constructor() : BottomSheetDialogFragment() {
 
     val args: LessonsFragmentBottomSheetDialogArgs by navArgs()
-    private val viewModel: LessonsFragmentBottomSheetDialogViewModel by viewModels()
     private lateinit var behavior: BottomSheetBehavior<*>
 
     private val binding get() = _binding!!
-    private var _binding: LessonsFragmentBottomSheetDialogFragmentBinding? = null
+    private var _binding: FragmentBottomSheetDialogLessonsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = LessonsFragmentBottomSheetDialogFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentBottomSheetDialogLessonsBinding.inflate(inflater, container, false)
         return binding.root
 
     }

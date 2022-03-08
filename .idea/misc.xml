@@ -32,6 +32,7 @@
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/activity_main.xml" value="0.2798913043478261" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/fragment_community_lessons.xml" value="0.2604166666666667" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/fragment_notifications.xml" value="0.2604166666666667" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/fragment_resources_lessons.xml" value="0.2604166666666667" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/fragment_syllabus_lessons.xml" value="0.2604166666666667" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/lessons_card_item_layout.xml" value="0.5" />
@@ -41,6 +42,8 @@
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/podcasts_fragment.xml" value="0.38697916666666665" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/podcasts_fragment_bottom_sheet_dialog.xml" value="0.14" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/round_corners_shape.xml" value="0.2798913043478261" />
+        <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/syllabus_lessons_item.xml" value="0.25" />
+        <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/layout/syllabus_lessons_item_recycler.xml" value="0.33" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/mipmap-anydpi-v26/ic_banner.xml" value="0.403125" />
         <entry key="..\:/Documents/Learning/platzi_clon/Platziappclon/app/src/main/res/mipmap-anydpi-v26/ic_check.xml" value="0.403125" />

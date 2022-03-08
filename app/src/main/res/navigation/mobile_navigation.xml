@@ -46,7 +46,7 @@
         android:id="@+id/lessons_fragment_bottom_sheet_dialog"
         android:name="com.example.platziappclon.ui.lessons.LessonsFragmentBottomSheetDialog"
         android:label="lessons_fragment_bottom_sheet_dialog_fragment"
-        tools:layout="@layout/lessons_fragment_bottom_sheet_dialog_fragment" >
+        tools:layout="@layout/fragment_bottom_sheet_dialog_lessons" >
         <action
             android:id="@+id/action_lessons_fragment_bottom_sheet_dialog_to_navigation_study"
             app:destination="@id/navigation_study" />
