@@ -20,15 +20,15 @@
 
     <fragment
         android:id="@+id/navigation_explore"
-        android:name="com.example.platziappclon.ui.dashboard.DashboardFragment"
+        android:name="com.example.platziappclon.ui.explore.ExploreFragment"
         android:label="@string/title_explore"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_explore" />
 
     <fragment
         android:id="@+id/navigation_downloads"
         android:name="com.example.platziappclon.ui.notifications.NotificationsFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_downloads" />
 
     <dialog
         android:id="@+id/podcastsFragment2"

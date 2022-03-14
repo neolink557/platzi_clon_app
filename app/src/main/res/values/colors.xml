@@ -8,6 +8,7 @@
     <color name="fancy_green">#95D904</color>
     <color name="rotten_green">#485235</color>
     <color name="non_straight_blue">#35BDF2</color>
+    <color name="dark_blue">#03091F</color>
 
     <color name="seek_bar_background">#41587A</color>
     <color name="seek_bar_progress">#ffffff</color>

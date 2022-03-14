@@ -1,4 +1,4 @@
-package com.example.platziappclon.data.network.lessons.lessonsdetail
+package com.example.platziappclon.data.providers.lessonsdetail
 
 import com.example.platziappclon.data.model.LessonsModuleModel
 import kotlinx.coroutines.Dispatchers
