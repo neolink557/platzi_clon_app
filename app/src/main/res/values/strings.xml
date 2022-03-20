@@ -20,4 +20,9 @@
     <string name="lessons_image">lessons image</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="brayan_david">Brayan David</string>
+    <string name="platzi_expert_plus">Platzi Expert Plus Pro Max 2048 GB</string>
+    <string name="_170_083_puntos">170.083 Puntos</string>
+    <string name="url"><![CDATA[https://media-exp1.licdn.com/dms/image/C4D03AQEzV4vlacX11A/profile-displayphoto-shrink_200_200/0/1642390273409?e=1648080000&v=beta&t=aUeXud6yiQb2iyboA8fEYTxGnHrZBUNXEIo1IcLrUh4]]></string>
+    <string name="url_badge">https://static.platzi.com/media/career-banner/badge-machine-learning.png</string>
 </resources>

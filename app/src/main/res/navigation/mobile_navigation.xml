@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/navigation_downloads"
         android:name="com.example.platziappclon.ui.notifications.NotificationsFragment"
-        android:label="@string/title_profile"
+        android:label="@string/title_downloads"
         tools:layout="@layout/fragment_downloads" />
 
     <dialog
@@ -54,4 +54,9 @@
             android:name="Lessons"
             app:argType="com.example.platziappclon.data.model.LessonsModel" />
     </dialog>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.platziappclon.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
