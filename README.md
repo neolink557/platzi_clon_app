@@ -11,7 +11,7 @@ Hi Stranger! this is the plazi clon app, i create this proyect based on the ofic
 - Data binding 
 - Navigation
 - Live Data
-- Connection with firebase to get the data through APIS
+- Connection with firebase to get the data through APIs
 
 ## The Creation Process
 
