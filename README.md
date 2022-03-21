@@ -1,6 +1,6 @@
 # Platzi App Clone For Android 👾👾👾
 
-Hi Stranger! this is the plazi clon app, i create this proyect based on the oficial app of Platzi and i try to recreate it for myself 
+Hi Stranger! this is the plazi clon app, I create this proyect based on the oficial app of Platzi and I try to recreate it for myself 
 
 ## The app contains
 
@@ -15,15 +15,15 @@ Hi Stranger! this is the plazi clon app, i create this proyect based on the ofic
 
 ## The Creation Process
 
-I began this app from scratch and i first take some screenshots of the official app and begin to analyze the components from each layout that i was going create
+I began this app from scratch and I first take some screenshots of the official app and begin to analyze the components from each layout that I was going create
 
 ![WhatsApp Image 2022-03-20 at 9 27 57 PM](https://user-images.githubusercontent.com/41975283/159197963-eb8d292b-ea61-45d1-856d-e0cdaed7d14a.jpeg)
 
-After that i began to think what design pattern i was going to use, i was chosen the MVVM because is the recommended design pattern by google and it gives me the possibility to reutilize code and use coroutines in a more comfortable way.
+After that I began to think what design pattern I was going to use, I was chosen the MVVM because is the recommended design pattern by google and it gives me the possibility to reutilize code and use coroutines in a more comfortable way.
 
-For the dependency injection i choose Dagger Hilt because i'm more familiar with it than with koin.
+For the dependency injection I choose Dagger Hilt because i'm more familiar with it than with koin.
 
-The most funny part of creating this project was use the firebase real time database because i'm familiar with consume APIs but i don't create the APIs often. For this project i was populate the data in the firebase database and get the json that the app will consume. The app gets the information of the Achievements,Lessons,Paths and podcasts from here
+The most funny part of creating this project was use the firebase real time database because i'm familiar with consume APIs but I don't create the APIs often. For this project I was populate the data in the firebase database and get the json that the app will consume. The app gets the information of the Achievements,Lessons,Paths and podcasts from here
 
 ![image](https://user-images.githubusercontent.com/41975283/159198703-2ccc9242-fddc-4983-b9d4-da9a093e1054.png)
 
@@ -31,7 +31,7 @@ And the Json looks like this:
 
 ![image](https://user-images.githubusercontent.com/41975283/159198821-d9a3e4e9-12d0-4848-96a1-25f426e0f5dd.png)
 
-To manage the video in the app i use the [Oficial Youtube Player API](https://developers.google.com/youtube/android/player?hl=es) and for the podcast section i use the default media player of android, in the beggining i was getting the podcasts from firebase but i reach the quota and i was have to use a local files.
+To manage the video in the app I use the [Oficial Youtube Player API](https://developers.google.com/youtube/android/player?hl=es) and for the podcast section I use the default media player of android, in the beggining I was getting the podcasts from firebase but I reach the quota and I was have to use a local files.
 
 
 ## Images
